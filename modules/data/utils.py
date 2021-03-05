@@ -8,7 +8,6 @@ import random
 from subprocess import check_output
 
 import numpy
-import sentencepiece as spm
 from matplotlib import pyplot as plt
 from tqdm import tqdm
 
@@ -143,24 +142,6 @@ def build_vocab_from_file(file, tokenize):
         _vocab.read_sequence(tokens)
 
     return _vocab
-
-
-# @disk_memoize
-def read_corpus_subw(file, subword_path):
-    subword = spm.SentencePieceProcessor()
-    subword.Load(subword_path + ".model")
-
-    vocab = Vocab()
-    vocab.load_from_vocab_file(subword_path, skip=4)
-
-    _data = []
-    for line in iterate_data(file):
-        tokens = subword.EncodeAsPieces(line.rstrip().encode('utf-8'))
-        _data.append(tokens)
-
-    vocab.subword = subword
-
-    return vocab, _data
 
 
 def hist_dataset(data, seq_len):

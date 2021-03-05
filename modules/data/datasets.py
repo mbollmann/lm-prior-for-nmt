@@ -7,6 +7,7 @@ from abc import ABC
 import numpy
 import sentencepiece as spm
 from sacremoses import MosesTokenizer
+from tokenizers import Tokenizer
 from tabulate import tabulate
 from torch.utils.data import Dataset
 
@@ -54,10 +55,14 @@ class BaseSequenceDataset(Dataset, ABC):
             self.tokenize = self.space_tok
 
         if self.subword_path is not None:
-            subword = spm.SentencePieceProcessor()
-            subword_path = fix_paths(subword_path, "datasets")
-            subword.Load(subword_path + ".model")
-            self.tokenize = lambda x: subword.EncodeAsPieces(x.rstrip())
+            subword_path = fix_paths(self.subword_path, "datasets")
+            if self.subword_path.endswith(".json"):
+                subword = Tokenizer.from_file(self.subword_path)
+                self.tokenize = lambda x: list(subword.encode(x.rstrip()).tokens)
+            else:
+                subword = spm.SentencePieceProcessor()
+                subword.Load(subword_path + ".model")
+                self.tokenize = lambda x: subword.EncodeAsPieces(x.rstrip())
         else:
             self.tokenize = MosesTokenizer(lang=lang).tokenize
 
