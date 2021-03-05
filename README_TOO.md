@@ -9,5 +9,6 @@ Notes on how to _actually_ get this to run:
   separately first.  Also installing `fasttext` through pip didn't work for me,
   I cloned the repo and followed the instructions here:
   https://fasttext.cc/docs/en/support.html
+- `conda install jinja2` also needed
 - `tensorboard` is missing from the requirements; `tokenizers` is needed by my
   own changes

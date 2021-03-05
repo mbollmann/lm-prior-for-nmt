@@ -28,43 +28,9 @@ MODEL_DIRS = ["models", "modules", "helpers"]
 VIS = {
     "server": "http://localhost",
     "enabled": True,
-    "port": 8096,
+    "port": 8097,
     "base_url": "/",
     "http_proxy_host": None,
     "http_proxy_port": None,
     "log_to_filename": os.path.join(BASE_DIR, "vis_logger.json")
 }
-
-if str(Path.home()) == "/home/christos":
-    VIS["server"] = "http://localhost"
-    VIS["port"] = 8097
-elif str(Path.home()) == "/home/cbaziotis":
-    VIS["server"] = "http://magni"
-    VIS["port"] = 8096
-else:
-    VIS["enabled"] = 8097
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
