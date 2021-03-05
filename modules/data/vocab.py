@@ -237,9 +237,11 @@ class Vocab(object):
         self.vocab = Counter()
 
         for line in open(file, encoding="utf-8").readlines():
-            token, count = line.split("\t")
-            self.vocab[token] = float(count)
-            self.add_token(token)
+            line = line.rstrip()
+            if line:
+                token, count = line.split("\t")
+                self.vocab[token] = float(count)
+                self.add_token(token)
 
     def save(self, file):
         with open(file, "w", encoding="utf-8") as f:
