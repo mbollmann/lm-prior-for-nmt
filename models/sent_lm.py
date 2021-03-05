@@ -1,6 +1,10 @@
 import os
+import sys
 
 from torch.utils.data import DataLoader
+
+SCRIPTDIR=os.path.dirname(os.path.realpath(__file__))
+sys.path.append(SCRIPTDIR + "/../")
 
 from helpers.opts import exp_options
 from models.sent_lm_callbacks import SentLMSamplesCallback
