@@ -21,3 +21,5 @@ glob2~=0.6
 visdom~=0.1.8.9
 tokenizers
 tensorboard
+graphviz
+jinja2
