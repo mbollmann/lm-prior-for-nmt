@@ -1,7 +1,11 @@
 import os
+import sys
 
 from torch import nn
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
+
+SCRIPTDIR=os.path.dirname(os.path.realpath(__file__))
+sys.path.append(SCRIPTDIR + "/../")
 
 from helpers.opts import exp_options
 from helpers.training import load_checkpoint
